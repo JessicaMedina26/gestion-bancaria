@@ -23,5 +23,5 @@ class ListClienteView(generics.ListAPIView):
             serializer = ClienteListSerializer(items, many=True)
             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return JsonResponse({"message": "No se encontraron datos disponibles"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "No se encontraron datos disponibles"}, status=status.HTTP_400_BAD_REQUEST)
 

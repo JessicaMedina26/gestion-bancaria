@@ -47,7 +47,8 @@ class Cuenta(models.Model):
     objects = models.Manager()
     id_cuenta = models.AutoField(primary_key=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='cliente')
-    nro_contrato = models.CharField(max_length=255, unique=True, editable=False, blank=True)
+    nro_cuenta = models.PositiveIntegerField(unique=True)
+    nro_contrato = models.CharField(max_length=255, unique=True)
     fecha_alta = models.DateTimeField("Fecha Alta", auto_now_add=True)
     tipo_cuenta = models.CharField(choices=(
         ('CUENTA CORRIENTE', 'CUENTA CORRIENTE'),

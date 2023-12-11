@@ -31,11 +31,11 @@ class CreateDepartamentoView(generics.CreateAPIView):
     def post(self, request):
         serializer = DepartamentoSerializer(data=request.data)
         if Departamento.objects.filter(**request.data).exists():
-            raise serializers.ValidationError('Ya existe el Departamento')
+            return Response({"message": "Ya existe el Departamento"}, status=status.HTTP_400_BAD_REQUEST)
 
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({"message": "Procesado con éxito"}, status=status.HTTP_200_OK)
         else:
             return Response({"message": f"Debe completar los campos solicitados"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -44,12 +44,15 @@ class UpdateDepartamentoView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def put(self, request, pk):
-        item = Departamento.objects.get(pk=pk)
-        serializer = DepartamentoSerializer(instance=item, data=request.data)
+        try:
+            item = Departamento.objects.get(pk=pk)
+        except Departamento.DoesNotExist:
+            return Response({"message": "No se pudo identificar el Departamento"}, status=status.HTTP_400_BAD_REQUEST)
 
+        serializer = DepartamentoSerializer(instance=item, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({"message": "Procesado con éxito"}, status=status.HTTP_200_OK)
         else:
             return Response({"message": f"ID: {pk} no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -58,9 +61,11 @@ class DeleteDepartamentoView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def put(self, request, pk):
-        item = Departamento.objects.get(pk=pk)
-        if item is None:
-            return Response({"message": f"ID: {pk} no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            item = Departamento.objects.get(pk=pk)
+        except Departamento.DoesNotExist:
+            return Response({"message": "No se pudo identificar el Departamento"}, status=status.HTTP_400_BAD_REQUEST)
+
         item.estado = False
         item.save()
         return Response({"message": "Procesado con éxito"}, status=status.HTTP_200_OK)

@@ -1,6 +1,7 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Departamento, Ciudad, Persona, Cliente
+from .models import Departamento, Ciudad, Persona, Cliente, Cuenta, Movimiento
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -74,4 +75,16 @@ class ClienteListSerializer(serializers.ModelSerializer):
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
+        fields = '__all__'
+
+
+class CuentaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cuenta
+        fields = '__all__'
+
+
+class MovimientoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movimiento
         fields = '__all__'
