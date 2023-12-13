@@ -13,26 +13,26 @@ Including another URLconf
     1. Import to include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path, include
 from gestion_bancaria import views
 
 urlpatterns = [
-    # path('', views.home),
+    # frontend
     path('', views.index, name='home'),
-    path('login/', views.index, name='iniciar_sesion'),
-    path('logout/', views.index, name='cerrar_sesion'),
-    path('registro/', views.index, name='registro'),
-
-    path('cuentas/', views.index, name='cuentas_desc'),
-    path('about/', views.index, name='about_desc'),
-    path('contacto/', views.index, name='contact_desc'),
-    path('politicas/', views.index, name='politicas_desc'),
-    path('terminos/', views.index, name='terminos_desc'),
+    path('login/', views.login_page, name='login_page'),
+    path('logout/', views.logout_page, name='logout'),
+    path('mis-cuentas/', views.mis_cuentas_page, name='mis_cuentas_page'),
+    path('mis-movimientos/', views.mis_movimientos_page, name='mis_movimientos_page'),
+    path('mis-movimientos/deposito/', views.deposito_page, name='deposito_page'),
+    path('mis-movimientos/extraccion/', views.extraccion_page, name='extraccion_page'),
+    path('mis-movimientos/transferencia/', views.transferencia_page, name='transferencia_page'),
 
     # apis
     path('admin/logout/', views.log_out),
-    path('admin/', admin.site.urls),
     path('api/', include('gestion_bancaria.urls')),
-    path("i18n/", include("django.conf.urls.i18n")),
+
+    # admin django
+    # path('admin/', admin.site.urls),
+    # path("i18n/", include("django.conf.urls.i18n")),
 ]

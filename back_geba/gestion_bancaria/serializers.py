@@ -5,6 +5,25 @@ from .models import Departamento, Ciudad, Persona, Cliente, Cuenta, Movimiento
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super(MyTokenObtainPairSerializer, self).validate(attrs)
+        data.update({'id': self.user.id})
+        data.update({'username': self.user.username})
+        data.update({'first_name': self.user.first_name})
+        data.update({'last_name': self.user.last_name})
+        data.update({'email': self.user.email})
+        data.update({'is_superuser': self.user.is_superuser})
+
+        if Cliente.objects.filter(persona=self.user.id).exists():
+            try:
+                item_cliente = Cliente.objects.get(persona=self.user.id)
+            except Cliente.DoesNotExist:
+                item_cliente = None
+            data.update({'id_cliente': item_cliente.id_cliente})
+        else:
+            data.update({'id_cliente': None})
+        return data
+
     @classmethod
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
