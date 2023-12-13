@@ -18,8 +18,8 @@ function verMisCuentas() {
     });
 }
 
-function redirectMovimiento(id_cuenta, nro_cuenta){
-    redirect(`/mis-movimientos/?cuenta=${id_cuenta}`);
+function redirectMovimiento(id_cuenta, nro_cuenta) {
+    redirect(`/mis-movimientos/?id=${id_cuenta}&cuenta=${nro_cuenta}`);
 }
 
 function previewDetail(response) {
