@@ -37,10 +37,10 @@ function procesar() {
     };
     postData('/api/movimiento/deposit/', body).then((response) => {
       if(typeof response.status !== undefined && response.status > 201) {
-        showMessage('danger', response.message, true, 5000);
+        showMessage('danger', response.message, true, 8000);
         return;
       }
-      showMessage('success', response.message, true, 5000);
+      showMessage('success', response.message, true, 8000);
     });
 }
 
