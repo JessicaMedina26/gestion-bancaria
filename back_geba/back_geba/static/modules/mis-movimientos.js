@@ -42,9 +42,15 @@ function verMisMovimientos() {
 function previewDetail(response) {
     let htmlView = '';
     response.forEach((row) => {
+        const cta_origen = Math.round(row.cuenta_origen);
+        const cta_destino = Math.round(row.cuenta_destino);
+        // const saldo_anterior = row.moneda == 'GS' ? Math.round(row.saldo_anterior) : row.saldo_anterior;
+        // const monto_movimiento = row.moneda == 'GS' ? Math.round(row.monto_movimiento) : row.monto_movimiento;
+        // const saldo_actual = row.moneda == 'GS' ? Math.round(row.saldo_actual) : row.saldo_actual;
+
         htmlView+= `<tr>
-            <td><span style="font-size:15px;padding:10px" class="badge badge-soft-primary">${Math.round(row.cuenta_origen)}</span></td>
-            <td><span style="font-size:15px;padding:10px" class="badge badge-soft-primary">${Math.round(row.cuenta_destino)}</span></td>
+            <td><span style="font-size:15px;padding:10px" class="badge badge-soft-primary">${cta_origen}</span></td>
+            <td><span style="font-size:15px;padding:10px" class="badge badge-soft-primary">${cta_destino}</span></td>
             <td><span style="font-size:15px;padding:10px">${row.tipo_movimiento}</span></td>
             <td><span style="font-size:15px;padding:10px">${row.saldo_anterior}</span></td>
             <td><span style="font-size:15px;padding:10px">${row.monto_movimiento}</span></td>

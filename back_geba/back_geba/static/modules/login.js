@@ -21,6 +21,11 @@ function acceder() {
       }
       saveToken(response);
       saveCurrentUser(response);
-      redirect('/mis-cuentas');
+      if(!response.is_superuser) {
+        redirect('/mis-cuentas');
+      }
+      if(response.is_superuser) {
+        redirect('/cuentas');
+      }
     });
 }

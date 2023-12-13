@@ -15,6 +15,10 @@ def login_page(request):
     return render(request, 'login.html')
 
 
+def cuentas_page(request):
+    return render(request, 'cuentas.html')
+
+
 def mis_cuentas_page(request):
     return render(request, 'mis-cuentas.html')
 

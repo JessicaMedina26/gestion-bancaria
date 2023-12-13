@@ -6,6 +6,14 @@
     if(currentUser != null) {
         let username = currentUser.username;
         document.querySelector('#lblCurrentUser').innerHTML = `<span class="icon-person text-primary" style="margin-left: 10px;margin-top:8px;margin-bottom:3px;"></span> ${username} `;
+
+        if(currentUser.is_superuser) {
+            document.querySelector('.nav-admin').style.display = 'block';
+            document.querySelector('.nav-cliente').style.display = 'none';
+        } else {
+            document.querySelector('.nav-admin').style.display = 'none';
+            document.querySelector('.nav-cliente').style.display = 'block';
+        }
     } else {
         document.querySelector('#menuAuth').style.display = 'none';
     }
