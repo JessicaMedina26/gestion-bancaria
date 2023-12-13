@@ -16,11 +16,9 @@ function acceder() {
     let password = getValue('password');
     postData('/api/token/', {username, password}).then((response) => {
       if(typeof response.status !== undefined && response.status > 201) {
-        console.log('response', response);
         showMessage('danger', response.message, true, 5000);
         return;
       }
-      console.log({ response });
       saveToken(response);
       saveCurrentUser(response);
       redirect('/mis-cuentas');

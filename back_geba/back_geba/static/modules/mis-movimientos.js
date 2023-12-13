@@ -1,32 +1,35 @@
-var id_cuenta = 0;
-var nro_cuenta = 0;
+var idCuenta = 0;
+var nroCuenta = 0;
 document.addEventListener("DOMContentLoaded", function(event) {
     authVerifyPage();
+    getParams();
+    verMisMovimientos();
+});
 
+function getParams() {
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams == undefined || urlParams == null) {
         redirect('/mis-cuentas/');
         return;
     }
-    id_cuenta = urlParams.get('id');
-    nro_cuenta = urlParams.get('cuenta');
-    if(id_cuenta == undefined || id_cuenta == null || nro_cuenta == undefined || nro_cuenta == null) {
+
+    idCuenta = urlParams.get('id');
+    nroCuenta = urlParams.get('cuenta');
+    if(idCuenta == undefined || idCuenta == null || nroCuenta == undefined || nroCuenta == null) {
         redirect('/mis-cuentas/');
         return;
     }
-
-    verMisMovimientos(id_cuenta);
-});
-
-function redirectTab(url) {
-    redirect(`${url}?id=${id_cuenta}&cuenta=${nro_cuenta}`);
 }
 
-function verMisMovimientos(id_cuenta) {
+function redirectTab(url) {
+    redirect(`${url}?id=${idCuenta}&cuenta=${nroCuenta}`);
+}
+
+function verMisMovimientos() {
     let currentUser = getCurrentUser();
     if(currentUser == null) return;
 
-    getData(`/api/movimiento/all/?cuenta=${id_cuenta}`).then((response) => {
+    getData(`/api/movimiento/all/?cuenta=${idCuenta}`).then((response) => {
       if(typeof response.status !== undefined && response.status > 201) {
         document.querySelector('#sectionPage').style.display = 'none';
         showMessage('danger', response.message, true, null);

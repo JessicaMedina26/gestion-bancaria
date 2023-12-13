@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     verMisCuentas();
 });
 
-
 function verMisCuentas() {
     let currentUser = getCurrentUser();
     if(currentUser == null) return;

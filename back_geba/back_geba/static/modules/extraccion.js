@@ -1,22 +1,45 @@
-var id_cuenta = 0;
-var nro_cuenta = 0;
+var idCuenta = 0;
+var nroCuenta = 0;
 document.addEventListener("DOMContentLoaded", function(event) {
     authVerifyPage();
+    getParams();
+});
 
+function getParams() {
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams == undefined || urlParams == null) {
         redirect('/mis-cuentas/');
         return;
     }
-    id_cuenta = urlParams.get('id');
-    nro_cuenta = urlParams.get('cuenta');
-    if(id_cuenta == undefined || id_cuenta == null || nro_cuenta == undefined || nro_cuenta == null) {
+
+    idCuenta = urlParams.get('id');
+    nroCuenta = urlParams.get('cuenta');
+    if(idCuenta == undefined || idCuenta == null || nroCuenta == undefined || nroCuenta == null) {
         redirect('/mis-cuentas/');
         return;
     }
 
-});
+    setValue('nro_cuenta_origen', nroCuenta);
+    setValue('moneda', 'GS');
+}
 
 function redirectTab(url) {
-    redirect(`${url}?id=${id_cuenta}&cuenta=${nro_cuenta}`);
+    redirect(`${url}?id=${idCuenta}&cuenta=${nroCuenta}`);
+}
+
+function procesar() {
+    clearMessage();
+    const body = {
+        moneda: getValue('moneda'),
+        monto: getValue('monto'),
+        nro_cuenta_origen: nroCuenta,
+        canal: 'WEB'
+    };
+    postData('/api/movimiento/deposit/', body).then((response) => {
+      if(typeof response.status !== undefined && response.status > 201) {
+        showMessage('danger', response.message, true, 5000);
+        return;
+      }
+      showMessage('success', response.message, true, 5000);
+    });
 }
