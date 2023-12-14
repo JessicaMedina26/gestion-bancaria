@@ -12,7 +12,6 @@ function verMisCuentas() {
         document.querySelector('#sectionPage').style.display = 'none';
         showMessage('danger', response.message, true, null);
       }
-      console.log('ddd',{ response });
       document.querySelector('#lista').innerHTML = previewDetail(response);
     });
 }

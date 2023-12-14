@@ -40,8 +40,8 @@ def transferencia_page(request):
 
 
 def logout_page(request):
-    logout(request)  # Cierra la sesión del usuario actual
-    return redirect('inicio')  # Redirige al usuario a la página de inicio u otra página de tu elección
+    logout(request)
+    return render(request, 'login.html')
 
 
 # methods globals
