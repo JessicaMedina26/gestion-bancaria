@@ -1,0 +1,50 @@
+{% extends 'content-auth.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="site-section bg-light" id="contact-section" data-aos="fade">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="section-title mb-3">Banca Web</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-5">
+            <form action="post" id="formLogin" class="p-5 bg-white">
+              <h2 class="h4 text-black mb-5">Acceso</h2>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="username">Nombre de Usuario</label>
+                  <input type="text" id="username" class="form-control">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="password">Contraseña</label>
+                  <input type="password" id="password" class="form-control">
+                </div>
+              </div>
+
+              <div id="message"></div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="button" onclick="acceder()" value="Acceder" class="btn btn-primary btn-md text-white">
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <script src="{% static 'modules/login.js' %}"></script>
+
+{% endblock content %}
+

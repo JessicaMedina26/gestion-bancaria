@@ -1,0 +1,18 @@
+body.theme-darkly p {
+    color: pink;
+}
+
+@media (prefers-color-scheme: dark) {
+    body.theme-darkly p {
+        color: pink;
+    }
+}
+
+
+#recent-actions-module {
+    visibility: hidden;
+}
+
+#jazzy-actions > .object-tools {
+    visibility: hidden;
+}

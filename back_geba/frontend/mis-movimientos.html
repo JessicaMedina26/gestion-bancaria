@@ -1,0 +1,63 @@
+{% extends 'content-auth.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="site-section border-bottom bg-light" id="services-section">
+      <div class="container">
+
+        <div class="row mb-5">
+          <div class="col-12 text-center" data-aos="fade">
+            <h2 class="section-title mb-3">Mis Movimientos</h2>
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page">Detalle</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #3b76e1; cursor:pointer;" onclick="redirectTab('/mis-movimientos/deposito')">Deposito</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #3b76e1; cursor:pointer;" onclick="redirectTab('/mis-movimientos/extraccion')">Extracción</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #3b76e1; cursor:pointer;" onclick="redirectTab('/mis-movimientos/transferencia')">Transferencia</a>
+          </li>
+        </ul>
+
+        <div class="row align-items-stretch">
+            <div class="col-md-12">
+                <div id="message"></div>
+            </div>
+        </div>
+
+        <div class="row align-items-stretch" id="sectionPage">
+          <div class="col-md-12 col-lg-12 mb-12 mb-lg-12" data-aos="fade-up">
+
+            <div class="table-responsive">
+                <table class="table project-list-table table-nowrap align-middle table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cuenta Origen</th>
+                            <th scope="col">Cuenta Destino</th>
+                            <th scope="col">Tipo de Movimiento</th>
+                            <th scope="col">Saldo Anterior</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Saldo Actual</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista"></tbody>
+                </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <script src="{% static 'modules/mis-movimientos.js' %}"></script>
+
+{% endblock content %}
