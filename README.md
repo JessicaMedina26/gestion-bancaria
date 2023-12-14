@@ -53,7 +53,9 @@
 
 
 #### crearemos columnas de base de datos con los campos de nuestros modelos mediante el proceso de migración. 
-- Usaremos el manage.py archivo para aplicar las migraciones. 
+
+Usaremos el manage.py archivo para aplicar las migraciones.
+
     python manage.py makemigrations
     python manage.py migrate
 
