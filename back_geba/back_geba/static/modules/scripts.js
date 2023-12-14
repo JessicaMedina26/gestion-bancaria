@@ -83,6 +83,46 @@ function redirect(page) {
   window.location.href = page;
 }
 
+ async function deleteData(url = '', data = {}) {
+   let headers = { 'Content-Type': 'application/json' };
+   let token = getToken();
+   if(token != null) {
+      headers = headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
+   }
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    let jsonError = await response.json();
+    let message = jsonError.message;
+    if(response.status == 401) { message = 'Credenciales inválidas'; }
+    return {status: response.status, message: message};
+  }
+  return response.json();
+}
+
+ async function putData(url = '', data = {}) {
+   let headers = { 'Content-Type': 'application/json' };
+   let token = getToken();
+   if(token != null) {
+      headers = headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
+   }
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    let jsonError = await response.json();
+    let message = jsonError.message;
+    if(response.status == 401) { message = 'Credenciales inválidas'; }
+    return {status: response.status, message: message};
+  }
+  return response.json();
+}
+
  async function postData(url = '', data = {}) {
    let headers = { 'Content-Type': 'application/json' };
    let token = getToken();

@@ -36,11 +36,13 @@ function procesar() {
         nro_cuenta_destino: getValue('nro_cuenta_destino'),
         canal: 'WEB'
     };
-    postData('/api/movimiento/deposit/', body).then((response) => {
+    postData('/api/movimiento/transfer/', body).then((response) => {
       if(typeof response.status !== undefined && response.status > 201) {
         showMessage('danger', response.message, true, 8000);
         return;
       }
       showMessage('success', response.message, true, 8000);
+      setValue('monto', '');
+      setValue('nro_cuenta_destino', '');
     });
 }

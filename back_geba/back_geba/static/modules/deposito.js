@@ -41,6 +41,7 @@ function procesar() {
         return;
       }
       showMessage('success', response.message, true, 8000);
+      setValue('monto', '');
     });
 }
 
